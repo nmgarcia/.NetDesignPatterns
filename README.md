@@ -1,2 +1,2 @@
 # .NetDesignPatterns
-Examples of desing patterns using 
+Examples of desing patterns using .Net
