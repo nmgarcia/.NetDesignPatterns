@@ -8,6 +8,9 @@ The adapter class acted as a bridge between the two interfaces, and the client w
  */
 namespace Adapter
 {
+    /// <summary>
+    /// Target
+    /// </summary>
     public interface IShape
     {
         double CalculateArea();
@@ -23,7 +26,9 @@ namespace Adapter
             return Width * Height;
         }
     }
-
+    /// <summary>
+    /// Adaptee
+    /// </summary>
     public class Triangle
     {
         public double Base { get; set; }
@@ -35,6 +40,9 @@ namespace Adapter
         }
     }
 
+    /// <summary>
+    /// Adapter
+    /// </summary>
     public class TriangleAdapter : IShape
     {
         private readonly Triangle _triangle;
