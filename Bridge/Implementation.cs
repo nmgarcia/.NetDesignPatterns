@@ -1,87 +1,89 @@
 ﻿/*
- En este ejemplo, la abstracción es Notificacion, que tiene una referencia a la interfaz ICanalDeNotificacion que es implementada por diferentes tipos
-de canales de notificación concretos (CanalDeNotificacionPorEmail y CanalDeNotificacionPorSMS). 
-Las implementaciones concretas son NotificacionPorEmail y NotificacionPorSMS, que heredan de la abstracción y tienen la responsabilidad de enviar un mensaje
-de notificación a través del canal correspondiente.
+ In this example, the abstraction is Notification, which has a reference to the INotificationChannel interface that is implemented by different types of concrete
+notification(refined abstractions) channels (EmailNotificationChannel and SMSNotificationChannel).
+The concrete implementations are EmailNotification and SMSNotification, which inherit from the abstraction and are responsible for sending a notification message
+through the corresponding channel.
  */
 
 namespace Bridge
 {
     /// <summary>
-    /// Abstracción
+    /// Abstraction
     /// </summary>
-    public abstract class Notificacion
+    public abstract class Notification
     {
-        protected ICanalDeNotificacion _canalDeNotificacion;
+        protected INotificationChannel _notificationChannel;
 
-        public Notificacion(ICanalDeNotificacion canalDeNotificacion)
+        public Notification(INotificationChannel notificationChannel)
         {
-            _canalDeNotificacion = canalDeNotificacion;
+            _notificationChannel = notificationChannel;
         }
 
-        public abstract void Enviar(string mensaje);
+        public abstract void Send(string message);
     }
 
     /// <summary>
-    /// Implementación
+    /// Implementation
     /// </summary>
-    public interface ICanalDeNotificacion
+    public interface INotificationChannel
     {
-        void EnviarNotificacion(string mensaje);
+        void SendNotification(string message);
     }
 
     /// <summary>
-    /// Implementación concreta 1
+    /// Concrete Implementation 1
     /// </summary>
-    public class CanalDeNotificacionPorEmail : ICanalDeNotificacion
+    public class EmailNotificationChannel : INotificationChannel
     {
-        public void EnviarNotificacion(string mensaje)
+        public void SendNotification(string message)
         {
-            Console.WriteLine($"Notificación por correo electrónico: '{mensaje}'.");
-        }
-    }
-
-    /// <summary>
-    /// Implementación concreta 2
-    /// </summary>
-    public class CanalDeNotificacionPorSMS : ICanalDeNotificacion
-    {
-        public void EnviarNotificacion(string mensaje)
-        {
-            Console.WriteLine($"Notificación por mensaje de texto: '{mensaje}'.");
+            Console.WriteLine($"Sending email notification: '{message}'.");
         }
     }
 
     /// <summary>
-    /// Abstaccion Refinada 1
+    /// Concrete Implementation 2
     /// </summary>
-    public class NotificacionPorEmail : Notificacion
+    public class SMSNotificationChannel : INotificationChannel
     {
-        public NotificacionPorEmail(ICanalDeNotificacion canalDeNotificacion) : base(canalDeNotificacion)
+        public void SendNotification(string message)
         {
-        }
-
-        public override void Enviar(string mensaje)
-        {
-            Console.WriteLine($"Enviando notificación por correo electrónico.");
-            _canalDeNotificacion.EnviarNotificacion(mensaje);
+            Console.WriteLine($"Sending SMS notification: '{message}'.");
         }
     }
 
     /// <summary>
-    /// Abstaccion Refinada 2
+    /// Refined Abstraction 1
     /// </summary>
-    public class NotificacionPorSMS : Notificacion
+    public class EmailNotification : Notification
     {
-        public NotificacionPorSMS(ICanalDeNotificacion canalDeNotificacion) : base(canalDeNotificacion)
+        public EmailNotification(INotificationChannel notificationChannel) : base(notificationChannel)
         {
         }
 
-        public override void Enviar(string mensaje)
+        public override void Send(string message)
         {
-            Console.WriteLine($"Enviando notificación por mensaje de texto.");
-            _canalDeNotificacion.EnviarNotificacion(mensaje);
+            Console.WriteLine($"Sending email notification.");
+            _notificationChannel.SendNotification(message);
         }
     }
+
+    /// <summary>
+    /// Refined Abstraction 2
+    /// </summary>
+    public class SMSNotification : Notification
+    {
+        public SMSNotification(INotificationChannel notificationChannel) : base(notificationChannel)
+        {
+        }
+
+        public override void Send(string message)
+        {
+            Console.WriteLine($"Sending SMS notification.");
+            _notificationChannel.SendNotification(message);
+        }
+    }
+
+    
 
 }

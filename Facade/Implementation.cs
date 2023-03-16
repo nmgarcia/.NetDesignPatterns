@@ -1,63 +1,62 @@
 ﻿/*
- En este ejemplo, el subsistema complejo es el SistemaDeVentaDeBoletos, que tiene múltiples métodos para realizar diferentes tareas en el proceso de venta de boletos.
-La fachada FachadaDeVentaDeBoletos proporciona un método simplificado ComprarBoletos() que se encarga de llamar al conjunto de métodos del subsistema para realizar la 
-venta de boletos.
-El cliente interactúa únicamente con la fachada y no necesita conocer la complejidad del sistema de venta de boletos.
+ In this example, the class TicketSellingSystem is the complex subsystem that handles operations related to ticket sales.
+The class TicketSellingSystemFacade is the facade that provides a simplified interface for buying tickets.
+The class Program is the client that uses the facade to buy tickets.
  */
 
 namespace Facade
 {
     /// <summary>
-    /// Subsistema complejo
+    /// Complex subsystem
     /// </summary>
-    public class SistemaDeVentaDeBoletos
+    public class TicketSellingSystem
     {
-        public void SeleccionarPelicula(string pelicula)
+        public void SelectMovie(string movie)
         {
-            Console.WriteLine($"La película '{pelicula}' ha sido seleccionada.");
+            Console.WriteLine($"The movie '{movie}' has been selected.");
         }
 
-        public void SeleccionarHorario(DateTime horario)
+        public void SelectShowtime(DateTime showtime)
         {
-            Console.WriteLine($"El horario '{horario.ToString()}' ha sido seleccionado.");
+            Console.WriteLine($"The showtime '{showtime.ToString()}' has been selected.");
         }
 
-        public void SeleccionarAsientos(int[] asientos)
+        public void SelectSeats(int[] seats)
         {
-            Console.WriteLine($"Los asientos '{string.Join(", ", asientos)}' han sido seleccionados.");
+            Console.WriteLine($"The seats '{string.Join(", ", seats)}' have been selected.");
         }
 
-        public void RealizarPago(int[] asientos, float precio)
+        public void MakePayment(float total)
         {
-            float total = asientos.Length * precio;
-            Console.WriteLine($"Se ha realizado el pago por un total de ${total}.");
+            Console.WriteLine($"The payment has been made for a total of ${total}.");
         }
 
-        public void ImprimirBoleto()
+        public void PrintTicket()
         {
-            Console.WriteLine("El boleto ha sido impreso.");
+            Console.WriteLine("The ticket has been printed.");
         }
     }
 
     /// <summary>
-    /// Fachada para el sistema de venta de boletos
+    /// Facade for the ticket selling system
     /// </summary>
-    public class FachadaDeVentaDeBoletos
+    public class TicketSellingSystemFacade
     {
-        private readonly SistemaDeVentaDeBoletos _sistemaDeVentaDeBoletos;
+        private readonly TicketSellingSystem _ticketSellingSystem;
 
-        public FachadaDeVentaDeBoletos()
+        public TicketSellingSystemFacade()
         {
-            _sistemaDeVentaDeBoletos = new SistemaDeVentaDeBoletos();
+            _ticketSellingSystem = new TicketSellingSystem();
         }
 
-        public void ComprarBoletos(string pelicula, DateTime horario, int[] asientos, float precio)
+        public void BuyTickets(string movie, DateTime showtime, int[] seats, float price)
         {
-            _sistemaDeVentaDeBoletos.SeleccionarPelicula(pelicula);
-            _sistemaDeVentaDeBoletos.SeleccionarHorario(horario);
-            _sistemaDeVentaDeBoletos.SeleccionarAsientos(asientos);            
-            _sistemaDeVentaDeBoletos.RealizarPago(asientos,precio);
-            _sistemaDeVentaDeBoletos.ImprimirBoleto();
+            _ticketSellingSystem.SelectMovie(movie);
+            _ticketSellingSystem.SelectShowtime(showtime);
+            _ticketSellingSystem.SelectSeats(seats);
+            float total = seats.Length * price;
+            _ticketSellingSystem.MakePayment(total);
+            _ticketSellingSystem.PrintTicket();
         }
-    }
+    }   
 }

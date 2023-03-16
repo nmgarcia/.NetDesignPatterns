@@ -4,14 +4,14 @@
     {
         static void Main(string[] args)
         {
-            ICanalDeNotificacion canalDeNotificacionPorEmail = new CanalDeNotificacionPorEmail();
-            ICanalDeNotificacion canalDeNotificacionPorSMS = new CanalDeNotificacionPorSMS();
+            INotificationChannel emailNotificationChannel = new EmailNotificationChannel();
+            INotificationChannel smsNotificationChannel = new SMSNotificationChannel();
 
-            Notificacion notificacionPorEmail = new NotificacionPorEmail(canalDeNotificacionPorEmail);
-            notificacionPorEmail.Enviar("¡Hola! Este es un correo electrónico.");
+            Notification emailNotification = new EmailNotification(emailNotificationChannel);
+            emailNotification.Send("Hello! This is an email.");
 
-            Notificacion notificacionPorSMS = new NotificacionPorSMS(canalDeNotificacionPorSMS);
-            notificacionPorSMS.Enviar("¡Hola! Este es un mensaje de texto.");
+            Notification smsNotification = new SMSNotification(smsNotificationChannel);
+            smsNotification.Send("Hello! This is a text message.");
         }
     }
 }

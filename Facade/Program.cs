@@ -4,14 +4,15 @@
     {
         static void Main(string[] args)
         {
-            FachadaDeVentaDeBoletos fachadaDeVentaDeBoletos = new FachadaDeVentaDeBoletos();
+            TicketSellingSystemFacade ticketSellingSystemFacade = new TicketSellingSystemFacade();
 
-            string pelicula = "Avengers: Endgame";
-            DateTime horario = new DateTime(2023, 3, 14, 19, 30, 0);
-            int[] asientos = { 1, 2, 3 };
-            float precio = 10.50f;
+            string movie = "Avengers: Endgame";
+            DateTime showtime = new DateTime(2023, 3, 14, 19, 30, 0);
+            int[] seats = { 1, 2, 3 };
+            float price = 10.50f;
 
-            fachadaDeVentaDeBoletos.ComprarBoletos(pelicula, horario, asientos, precio);
+            ticketSellingSystemFacade.BuyTickets(movie, showtime, seats, price);
+
 
         }
     }
