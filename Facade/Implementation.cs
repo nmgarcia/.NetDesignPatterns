@@ -1,6 +1,15 @@
-﻿namespace Facade
+﻿/*
+ En este ejemplo, el subsistema complejo es el SistemaDeVentaDeBoletos, que tiene múltiples métodos para realizar diferentes tareas en el proceso de venta de boletos.
+La fachada FachadaDeVentaDeBoletos proporciona un método simplificado ComprarBoletos() que se encarga de llamar al conjunto de métodos del subsistema para realizar la 
+venta de boletos.
+El cliente interactúa únicamente con la fachada y no necesita conocer la complejidad del sistema de venta de boletos.
+ */
+
+namespace Facade
 {
-    // Subsistema complejo
+    /// <summary>
+    /// Subsistema complejo
+    /// </summary>
     public class SistemaDeVentaDeBoletos
     {
         public void SeleccionarPelicula(string pelicula)
@@ -30,7 +39,9 @@
         }
     }
 
-    // Fachada para el sistema de venta de boletos
+    /// <summary>
+    /// Fachada para el sistema de venta de boletos
+    /// </summary>
     public class FachadaDeVentaDeBoletos
     {
         private readonly SistemaDeVentaDeBoletos _sistemaDeVentaDeBoletos;
