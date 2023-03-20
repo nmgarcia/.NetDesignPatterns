@@ -66,7 +66,4 @@ namespace Flyweight
             }
         }
     }
-
-   
-
 }
